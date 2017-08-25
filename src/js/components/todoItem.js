@@ -1,0 +1,33 @@
+
+import React, { Component, PropTypes } from 'react'
+
+export default class extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    async removeButtonHandler() {
+        const { item, removeItem } = this.props
+        await removeItem(item.id)
+    }
+
+    async changeStatusItemHandler() {
+        const { editItem, item } = this.props
+        await editItem({
+                id: item.id,
+                done: !item.done,
+        })
+    }
+
+    render() {
+        const {item, removeItem, editItem} = this.props
+
+        return <li className="todo-list__item" key={item.id}>
+            <input className="todo-list__item-checkbox" type="checkbox" defaultChecked={item.done} onClick={::this.changeStatusItemHandler}/>
+            <div className="todo-list__item-name">
+                {item.title}
+            </div>
+            <button onClick={::this.removeButtonHandler}>X</button>
+        </li>
+    }
+}
