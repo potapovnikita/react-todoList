@@ -5,7 +5,7 @@ react/redux todo list
 npm install
 
 # Run
-npm run server 
+npm run start 
 (Project will run at http://localhost:3000/)
 
 
