@@ -7,6 +7,7 @@ export default class extends Component {
             input: '',
             disabled: false,
             error: false,
+            errorMessage: '',
         }
     }
 
@@ -21,13 +22,16 @@ export default class extends Component {
     async clickButtonHandler(e) {
 
         let {
-            state: { input, disabled },
+            state: { input, disabled, errorMessage },
             props: { addTodo },
         } = this
 
         input = input.trim()
 
-        if (input === '') return
+        if (input === '') {
+            this.setState({ errorMessage: 'Поле не может быть пустым' })
+            return
+        }
 
         try {
             this.setState({ disabled: true, error: false })
@@ -36,7 +40,7 @@ export default class extends Component {
                     title: input,
                     done: false,
             })
-            this.setState({ disabled: false, input: '' })
+            this.setState({ disabled: false, input: '', errorMessage: '' })
         }
         catch (e) {
             console.error(e)
@@ -45,7 +49,7 @@ export default class extends Component {
     }
 
     render() {
-        const { disabled, input } = this.state
+        const { disabled, input, errorMessage } = this.state
         return (
             <div className="add-todo__container">
                 <input type="text"
@@ -57,7 +61,7 @@ export default class extends Component {
                        onKeyUp={::this.inputKeyupHandler}
                        placeholder="Enter todo..."
                        disabled={disabled} />
-                <span className="add-todo__input-error"></span>
+                <span className="add-todo__input-error">{errorMessage}</span>
                 <button className="add-todo__btn" onClick={::this.clickButtonHandler}> Add Todo </button>
             </div>
         )
