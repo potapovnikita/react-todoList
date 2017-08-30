@@ -1,5 +1,4 @@
 import 'babel-polyfill'
-
 import React from 'react'
 import { Provider } from 'react-redux'
 import ReactDom from 'react-dom'
@@ -8,7 +7,6 @@ import store from './store'
 import * as actions from './store/constants'
 import DatabaseProvider from './libs/database'
 import '../stylus/index.styl'
-// import styled from 'styled-components'
 
 const Database = new DatabaseProvider()
 
