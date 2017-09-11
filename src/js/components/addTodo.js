@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
+
 
 export default class extends Component {
     constructor(props) {
@@ -51,19 +53,51 @@ export default class extends Component {
     render() {
         const { disabled, input, errorMessage } = this.state
         return (
-            <div className="add-todo__container">
-                <input type="text"
+            <AddTodo>
+                <AddTodoInput type="text"
                        name="input"
-                       className="add-todo__input"
                        maxLength="90"
                        value={input}
                        onChange={::this.inputChangeHandler}
                        onKeyUp={::this.inputKeyupHandler}
                        placeholder="Enter todo..."
                        disabled={disabled} />
-                <span className="add-todo__input-error">{errorMessage}</span>
-                <button className="add-todo__btn" onClick={::this.clickButtonHandler}> Add Todo </button>
-            </div>
+                <AddTodoError>{errorMessage}</AddTodoError>
+                <AddTodoBtn className="add-todo__btn" onClick={::this.clickButtonHandler}> Add Todo </AddTodoBtn>
+            </AddTodo>
         )
     }
 }
+
+const AddTodo = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`
+
+const AddTodoError = styled.span`
+    margin-bottom: 20px;
+    color: red;
+`
+
+const AddTodoInput = styled.input`
+    width: 250px;
+    height: 40px;
+    padding-left: 10px;
+`
+
+const AddTodoBtn = styled.button`
+    width: 263px;
+    height: 40px;
+    background: #FFF;
+    color: #000;
+    border: none;
+    transition: 0.3s ease-in-out;
+    &:hover {
+        cursor: pointer;
+        background: #000;
+        color: #FFF;
+    }
+`

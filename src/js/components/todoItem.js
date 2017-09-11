@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 export default class extends Component {
     constructor(props) {
@@ -23,12 +24,49 @@ export default class extends Component {
     render() {
         const {item, removeItem, editItem} = this.props
 
-        return <li className="todo-list__item" key={item.id}>
-            <input className="todo-list__item-checkbox" type="checkbox" defaultChecked={item.done} onClick={::this.changeStatusItemHandler}/>
+        return <Li key={item.id}>
+            <Input type="checkbox" defaultChecked={item.done} onClick={::this.changeStatusItemHandler}/>
             <div className="todo-list__item-name">
-                <Link className="todo-list__item-link" to={`/todos/${item.id}`}> {item.title} </Link>
+                <Link className="todo-list__link" to={`/todos/${item.id}`}>
+                    <SpanLink done={item.done}>{item.title}</SpanLink>
+                </Link>
             </div>
-            <button onClick={::this.removeButtonHandler}>X</button>
-        </li>
+            <BlockDelete className="fa fa-trash-o" onClick={::this.removeButtonHandler}>&nbsp;Delete</BlockDelete>
+        </Li>
     }
+
 }
+
+const Li = styled.li`
+    position: relative;
+    display: flex;
+    padding: 10px;
+    list-style-type: none;
+    
+    &:nth-child(odd) {
+        background: white;
+    }
+`
+
+const Input = styled.input`
+    &:hover {
+        cursor: pointer;
+	}
+`
+
+const BlockDelete = styled.div`
+    position: absolute;
+    right: 20px;
+    
+    &:hover {
+        color: red;
+        cursor: pointer;
+    }
+`
+
+const SpanLink = styled.span`
+    color: ${props => props.done ? 'green' : 'black'};
+    &:hover {
+        text-decoration: underline;
+    }
+`

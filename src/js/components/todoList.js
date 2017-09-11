@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import TodoItem from './todoItem'
 
 
@@ -22,19 +23,24 @@ export default class extends Component {
                     removeItem={removeItem}
                     editItem={editItem} />
             })
-            : <div className="todo-list__empty">
+            : <div>
                 Список пуст
             </div>
     }
 
     render() {
         return (
-            <div className="todo-list__container">
-                <h3>Your todo's list</h3>
-                <ul>
+            <div>
+                <h3 className="fa fa-list">&nbsp;Your todo's list</h3>
+                <Container>
                     { ::this.getItems() }
-                </ul>
+                </Container>
             </div>
         )
     }
 }
+
+
+const Container = styled.ul`
+    padding: 0;
+`

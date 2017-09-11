@@ -24,9 +24,13 @@ module.exports = {
             {
                 test: /\.styl$/,
                 exclude: /node_modules/,
-
                 use: ["style-loader", "css-loader", "stylus-loader"],
             },
+            {
+                test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+                exclude: /node_modules/,
+                use: ["file-loader"]
+            }
         ],
     },
     devServer: {
